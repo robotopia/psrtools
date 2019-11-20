@@ -30,7 +30,7 @@ int main( int argc, char *argv[] )
     double fhi = atof(argv[3]);
 
     // Calculate the DM delay
-    double dmdelay = 4.15e6 * DM * (1.0/(flo*flo) - 1.0/(fhi*fhi));
+    double dmdelay = 4.148808e6 * DM * (1.0/(flo*flo) - 1.0/(fhi*fhi));
 
     // Print the output to stdout
     printf( "%.2f\n", dmdelay );
