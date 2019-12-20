@@ -5,9 +5,9 @@ void usage( char *argv[] )
 {
     fprintf( stderr, "Calculate the delay due to ISM dispersion between two "
                      "given frequencies, according to the formula\n\n" );
-    fprintf( stderr, "                   ⎛  DM  ⎞   ⎡ ⎛ fₗₒ ⎞⁻²   ⎛ fₕᵢ ⎞⁻²⎤\n" );
-    fprintf( stderr, "    Δt = 4.15 ms × ⎜——————⎟ × ⎢ ⎜ ——— ⎟   - ⎜ ——— ⎟  ⎥\n" );
-    fprintf( stderr, "                   ⎝pc/cm³⎠   ⎣ ⎝ MHz ⎠     ⎝ MHz ⎠  ⎦\n\n" );
+    fprintf( stderr, "                         ⎛  DM  ⎞   ⎡ ⎛ fₗₒ ⎞⁻²   ⎛ fₕᵢ ⎞⁻²⎤\n" );
+    fprintf( stderr, "    Δt = 4.15 × 10⁶ ms × ⎜——————⎟ × ⎢ ⎜ ——— ⎟   - ⎜ ——— ⎟  ⎥\n" );
+    fprintf( stderr, "                         ⎝pc/cm³⎠   ⎣ ⎝ MHz ⎠     ⎝ MHz ⎠  ⎦\n\n" );
     fprintf( stderr, "usage: %s [DM] [freq_lo] [freq_hi]\n", argv[0] );
     fprintf( stderr, "  DM      - dispersion measure (pc/cm³)\n" );
     fprintf( stderr, "  freq_lo - lower frequency (MHz)\n" );
