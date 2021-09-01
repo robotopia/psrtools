@@ -30,12 +30,13 @@ if (CSPICE_FOUND)
     include_directories(${CSPICE_INCLUDE_DIR})
     target_link_libraries(psrtools ${M_LIBRARY} ${CSPICE_LIBRARY})
     target_link_libraries(bary2topo ${M_LIBRARY} ${CSPICE_LIBRARY})
-    set_target_properties(psrtools PROPERTIES PUBLIC_HEADER "dm.h;vec.h;barycentre.h")
+    set_target_properties(psrtools PROPERTIES COMPILE_FLAGS "${COMPILE_FLAGS}" PUBLIC_HEADER "dm.h;vec.h;barycentre.h")
 else (CSPICE_FOUND)
     add_library(psrtools "dm.c;vec.c")
 endif (CSPICE_FOUND)
 
 add_executable(dmdelay "dmdelay.c;dm.c")
+set_target_properties(dmdelay PROPERTIES COMPILE_FLAGS "${COMPILE_FLAGS}")
 
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd DESTINATION bin)
 
