@@ -20,13 +20,16 @@ add_definitions(-DPSRTOOLS_VERSION="${PSRTOOLS_VERSION}")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
 find_package(CSPICE)
+find_library(M_LIBRARY m)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -march=native -Wall -Wextra")
 
 if (CSPICE_FOUND)
     add_library(psrtools "barycentre.c;dm.c;vec.c")
+    add_executable(bary2topo "bary2topo.c;barycentre.c;vec.c")
     include_directories(${CSPICE_INCLUDE_DIR})
-    target_link_libraries(psrtools ${CSPICE_LIBRARY})
+    target_link_libraries(psrtools ${M_LIBRARY} ${CSPICE_LIBRARY})
+    target_link_libraries(bary2topo ${M_LIBRARY} ${CSPICE_LIBRARY})
     set_target_properties(psrtools PROPERTIES PUBLIC_HEADER "dm.h;vec.h;barycentre.h")
 else (CSPICE_FOUND)
     add_library(psrtools "dm.c;vec.c")
@@ -35,6 +38,11 @@ endif (CSPICE_FOUND)
 add_executable(dmdelay "dmdelay.c;dm.c")
 
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd DESTINATION bin)
+
+if (CSPICE_FOUND)
+    install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bary2topo DESTINATION bin)
+endif(CSPICE_FOUND)
+
 install(TARGETS psrtools
     ARCHIVE DESTINATION lib
     PUBLIC_HEADER DESTINATION include/psrtools)

@@ -1,1 +1,7 @@
 build/*
+*.o
+*.a
+
+# Executables
+dmdelay
+bary2topo

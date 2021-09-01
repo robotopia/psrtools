@@ -6,7 +6,7 @@
 #  CSPICE_INCLUDE_DIR  - the CSPICE include directory (cached)
 #  CSPICE_INCLUDE_DIRS - the CSPICE include directories
 #                         (identical to CSPICE_INCLUDE_DIR)
-#  CSPICE_LIB          - the CSPICE library (cached)
+#  CSPICE_LIBRARY      - the CSPICE library (cached)
 #  CSPICE_LIBRARIES    - the CSPICE libraries
 #  CSPICE_HDF5         - the full embedded element pattern HDF5 file
 
@@ -24,17 +24,17 @@ if(NOT CSPICE_FOUND)
 
     find_path(CSPICE_INCLUDE_DIR SpiceUsr.h
     HINTS ${CSPICE_ROOT} PATH_SUFFIXES /include)
-    find_library(CSPICE_LIB cspice.a
+    find_library(CSPICE_LIBRARY cspice.a
     HINTS ${CSPICE_ROOT} PATH_SUFFIXES lib )
 
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(CSPICE DEFAULT_MSG
-    CSPICE_LIB CSPICE_INCLUDE_DIR)
+    CSPICE_LIBRARY CSPICE_INCLUDE_DIR)
 
 endif(NOT CSPICE_FOUND)
 
 if (CSPICE_FOUND)
-    message (STATUS "Found CSPICE (${CSPICE_LIB})")
+    message (STATUS "Found CSPICE (${CSPICE_LIBRARY})")
 else (CSPICE_FOUND)
     message( STATUS "CSPICE not found" )
 endif (CSPICE_FOUND)
