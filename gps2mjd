@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+import sys
+from astropy.time import Time
+
+try:
+    ts = Time(sys.argv[1:], format='gps')
+    for t in ts:
+        print(t.mjd)
+except:
+    print("error: arguments must be numbers that represent GPS times")
