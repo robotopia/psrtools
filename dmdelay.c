@@ -1,18 +1,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "dm.h"
+
 void usage( char *argv[] )
 {
     fprintf( stderr, "Calculate the delay due to ISM dispersion between two "
-                     "given frequencies, according to the formula\n\n" );
-    fprintf( stderr, "                         ⎛  DM  ⎞   ⎡ ⎛ fₗₒ ⎞⁻²   ⎛ fₕᵢ ⎞⁻²⎤\n" );
-    fprintf( stderr, "    Δt = 4.15 × 10⁶ ms × ⎜——————⎟ × ⎢ ⎜ ——— ⎟   - ⎜ ——— ⎟  ⎥\n" );
-    fprintf( stderr, "                         ⎝pc/cm³⎠   ⎣ ⎝ MHz ⎠     ⎝ MHz ⎠  ⎦\n\n" );
-    fprintf( stderr, "usage: %s [DM] [freq_lo] [freq_hi]\n", argv[0] );
-    fprintf( stderr, "  DM      - dispersion measure (pc/cm³)\n" );
-    fprintf( stderr, "  freq_lo - lower frequency (MHz)\n" );
-    fprintf( stderr, "  freq_hi - higher frequency (MHz)\n" );
-    fprintf( stderr, "The result is written to stdout and given in ms\n" );
+                     "given frequencies, according to the formula\n\n"
+                     "                               ⎛  DM  ⎞   ⎡ ⎛ fₗₒ ⎞⁻²   ⎛ fₕᵢ ⎞⁻²⎤\n"
+                     "    Δt = %10.6f × 10⁶ ms × ⎜——————⎟ × ⎢ ⎜ ——— ⎟   - ⎜ ——— ⎟  ⎥\n"
+                     "                               ⎝pc/cm³⎠   ⎣ ⎝ MHz ⎠     ⎝ MHz ⎠  ⎦\n\n"
+                     "usage: %s [DM] [freq_lo] [freq_hi]\n"
+                     "  DM      - dispersion measure (pc/cm³)\n"
+                     "  freq_lo - lower frequency (MHz)\n"
+                     "  freq_hi - higher frequency (MHz)\n"
+                     "The result is written to stdout and given in ms\n",
+                     DISPERSION_CONSTANT / 1e6,
+                     argv[0]
+           );
 }
 
 int main( int argc, char *argv[] )
@@ -30,10 +35,10 @@ int main( int argc, char *argv[] )
     double fhi = atof(argv[3]);
 
     // Calculate the DM delay
-    double dmdelay = 4.148808e6 * DM * (1.0/(flo*flo) - 1.0/(fhi*fhi));
+    double delay_ms = dmdiff( DM, flo, fhi );
 
     // Print the output to stdout
-    printf( "%.5f\n", dmdelay );
+    printf( "%.5f\n", delay_ms );
 
     // Exit gracefully
     return 0;

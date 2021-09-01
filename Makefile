@@ -7,7 +7,7 @@ TARGETS = dmdelay \
 
 all: $(TARGETS)
 
-dmdelay: dmdelay.o
+dmdelay: dmdelay.o dm.o
 nearby_pulsars: nearby_pulsars.o
 
 clean:
