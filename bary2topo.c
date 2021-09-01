@@ -36,7 +36,7 @@ int main( int argc, char *argv[] )
     for (i = 5; i < argc; i++)
     {
         mjd = atof(argv[i]);   // The epoch in question (MJD)
-        fprintf( out, "%10.6f %f\n", mjd, period * calc_doppler_factor( ra_hrs, dec_degs, mjd, ephemfile ) );
+        fprintf( out, "  %10.6f  %.15f\n", mjd, period / calc_doppler_factor( ra_hrs, dec_degs, mjd, ephemfile ) );
     }
 
     return EXIT_SUCCESS;
@@ -62,6 +62,7 @@ void fprintf_header( FILE *f, int argc, char *argv[] )
     for (i = 0; i < argc; i++)
         fprintf( f, " %s", argv[i] );
     fprintf( f, "\n#\n"
-            "#  (1)          (2)                     \n"
-            "#  MJD          Topocentric_period_(sec)\n" );
+            "# (1)           (2)                     \n"
+            "# MJD           Topocentric_period_(sec)\n"
+            "# --------------------------------------\n" );
 }
