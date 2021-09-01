@@ -27,6 +27,7 @@ if (CSPICE_FOUND)
     add_library(psrtools "barycentre.c;dm.c;vec.c")
     include_directories(${CSPICE_INCLUDE_DIR})
     target_link_libraries(psrtools ${CSPICE_LIBRARY})
+    set_target_properties(psrtools PROPERTIES PUBLIC_HEADER "dm.h;vec.h;barycentre.h")
 else (CSPICE_FOUND)
     add_library(psrtools "dm.c;vec.c")
 endif (CSPICE_FOUND)
@@ -34,4 +35,6 @@ endif (CSPICE_FOUND)
 add_executable(dmdelay "dmdelay.c;dm.c")
 
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd DESTINATION bin)
-install(TARGETS psrtools ARCHIVE DESTINATION lib)
+install(TARGETS psrtools
+    ARCHIVE DESTINATION lib
+    PUBLIC_HEADER DESTINATION include/psrtools)
