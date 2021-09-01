@@ -33,6 +33,5 @@ endif (CSPICE_FOUND)
 
 add_executable(dmdelay "dmdelay.c;dm.c")
 
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay DESTINATION bin)
-install(FILES gps2mjd DESTINATION bin)
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd DESTINATION bin)
 install(TARGETS psrtools ARCHIVE DESTINATION lib)
