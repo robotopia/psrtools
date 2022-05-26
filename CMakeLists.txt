@@ -21,6 +21,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
 find_package(CSPICE)
 find_library(M_LIBRARY m)
+find_library(ERFA_LIBRARY erfa)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -march=native -Wall -Wextra")
 
@@ -38,7 +39,10 @@ endif (CSPICE_FOUND)
 add_executable(dmdelay "dmdelay.c;dm.c")
 set_target_properties(dmdelay PROPERTIES COMPILE_FLAGS "${COMPILE_FLAGS}")
 
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd DESTINATION bin)
+add_executable(angsep "angsep.c")
+target_link_libraries(angsep ${M_LIBRARY} ${ERFA_LIBRARY})
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd angsep DESTINATION bin)
 
 if (CSPICE_FOUND)
     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bary2topo DESTINATION bin)
