@@ -71,7 +71,7 @@ int main( int argc, char *argv[] )
     // Parse command line arguments
     if (argc < 4)
     {
-        fprintf( stderr, "error: incorrect number of arguments\n" );
+        fprintf( stderr, "ERROR: incorrect number of arguments\n" );
         angsep_usage( argv );
         exit(EXIT_FAILURE);
     }
@@ -104,8 +104,10 @@ int main( int argc, char *argv[] )
 
         while (fscanf( f, "%s %s", str1, str2 ) == 2)
         {
-            radec2rad( str1, str2, &rarad2, &decrad2 );
-            printf( "%lf\n", eraSeps( rarad, decrad, rarad2, decrad2 ) );
+            if (radec2rad( str1, str2, &rarad2, &decrad2 ))
+                printf( "%lf\n", eraSeps( rarad, decrad, rarad2, decrad2 ) );
+            else
+                printf( "\n" );
         }
     }
 
