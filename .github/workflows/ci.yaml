@@ -1,0 +1,17 @@
+name: Workflow for Codecov with gcov
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Compile dm_TEST
+        run: make dm_TEST
+      - name: Run tests
+        run: ./dm_TEST
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          gcov: true
+          gcov_include: dm.c
