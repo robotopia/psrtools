@@ -5,3 +5,11 @@ build/*
 # Executables
 dmdelay
 bary2topo
+
+# Tests
+dm_TEST
+
+# gcov
+*.gcov
+*.gcno
+*.gcda
