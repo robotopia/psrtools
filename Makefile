@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -fprofile-arcs -ftest-coverage
-LDFLAGS = -lgcov --coverage
+LDFLAGS = -lgcov -lm --coverage
 
 TARGETS = dm_TEST
 
