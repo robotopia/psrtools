@@ -9,4 +9,4 @@ all_TESTS: $(TARGETS)
 run_dm_TEST: dm_TEST
 	./$<
 	
-dm_TEST: dm_TEST.o dm.o
+dm_TEST: dm_TEST.o dm.o vec.o
