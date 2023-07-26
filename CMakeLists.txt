@@ -42,7 +42,7 @@ set_target_properties(dmdelay PROPERTIES COMPILE_FLAGS "${COMPILE_FLAGS}")
 add_executable(angsep "angsep.c")
 target_link_libraries(angsep ${M_LIBRARY} ${ERFA_LIBRARY})
 
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd angsep DESTINATION bin)
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/dmdelay gps2mjd ${CMAKE_CURRENT_BINARY_DIR}/angsep DESTINATION bin)
 
 if (CSPICE_FOUND)
     install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/bary2topo DESTINATION bin)
